@@ -1,10 +1,14 @@
 import "@/styles/globals.css"
+import "@solana/wallet-adapter-react-ui/styles.css"
 
 import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
+import SolanaProvider from "@/providers/SolanaProvider"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
+import { ModeToggle } from "@/components/mode-toggle"
+import Navbar from "@/components/Navbar"
 import { ThemeProvider } from "@/components/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -69,18 +73,29 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head />
       <body
         className={cn(
-          "min-h-screen bg-background antialiased",
+          "min-h-screen overflow-hidden bg-background antialiased",
           inter.className
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <SolanaProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            // disableTransitionOnChange
+          >
+            <Navbar />
+            {/* <ModeToggle /> */}
+            {children}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 -z-10 grid grid-cols-2 -space-x-52 opacity-20"
+            >
+              <div className="h-56 bg-gradient-to-br from-blue-700 to-purple-400 blur-[106px]"></div>
+              <div className="h-32 bg-gradient-to-r from-cyan-400 to-indigo-600 blur-[106px]"></div>
+            </div>
+          </ThemeProvider>
+        </SolanaProvider>
       </body>
     </html>
   )
