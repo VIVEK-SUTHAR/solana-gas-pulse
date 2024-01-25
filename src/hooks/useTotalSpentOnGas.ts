@@ -75,7 +75,7 @@ function useTotalSpentOnGas(address: string) {
         setStatus("error")
       }
     }
-    // calculateGasInLast24Hours()
+    calculateGasInLast24Hours()
 
     return () => {
       singleTxnAbortController.abort()
