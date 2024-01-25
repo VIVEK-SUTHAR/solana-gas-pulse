@@ -7,5 +7,6 @@ export const env = createEnv({
   },
   runtimeEnv: {
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    SOLANA_RPC_URL: z.string().min(1).includes("https://"),
   },
 })

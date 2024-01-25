@@ -7,7 +7,9 @@ import SolanaProvider from "@/providers/SolanaProvider"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
-import { ModeToggle } from "@/components/mode-toggle"
+import { Toaster } from "@/components/ui/sonner"
+import BgGradinet from "@/components/BgGradinet"
+import Footer from "@/components/Footer"
 import Navbar from "@/components/Navbar"
 import { ThemeProvider } from "@/components/theme-provider"
 
@@ -53,7 +55,7 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
-    creator: "@_rdev7",
+    creator: "@theviveksuthar",
   },
   icons: {
     icon: "/favicon.ico",
@@ -73,27 +75,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head />
       <body
         className={cn(
-          "min-h-screen overflow-hidden bg-background antialiased",
+          "min-h-screen bg-background antialiased",
           inter.className
         )}
       >
         <SolanaProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            // disableTransitionOnChange
-          >
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Navbar />
-            {/* <ModeToggle /> */}
             {children}
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 -z-10 grid grid-cols-2 -space-x-52 opacity-20"
-            >
-              <div className="h-56 bg-gradient-to-br from-blue-700 to-purple-400 blur-[106px]"></div>
-              <div className="h-32 bg-gradient-to-r from-cyan-400 to-indigo-600 blur-[106px]"></div>
-            </div>
+            <Footer />
+            <BgGradinet />
+            <Toaster />
           </ThemeProvider>
         </SolanaProvider>
       </body>

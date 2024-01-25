@@ -1,5 +1,7 @@
 "use client"
 
+import React from "react"
+import shortenAddress from "@/utils/shortenAddress"
 import { useWallet } from "@solana/wallet-adapter-react"
 import { useWalletModal } from "@solana/wallet-adapter-react-ui"
 import { FiLogOut } from "react-icons/fi"
@@ -23,8 +25,7 @@ export default function ConnectButton() {
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Button>
-              {publicKey?.toBase58().slice(0, 4)}...
-              {publicKey?.toBase58().slice(-4)}
+              {shortenAddress(publicKey?.toString()!) || ""}
               <IoIosArrowDown />
             </Button>
           </DropdownMenuTrigger>
