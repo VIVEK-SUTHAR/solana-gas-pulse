@@ -27,7 +27,7 @@ const GasFee: FC<GasFeesProps> = ({ totalGasSpent }) => {
 
   return (
     <CardContent className="grid gap-4">
-      <div className="flex items-center space-x-4 rounded-md border p-4">
+      <div className="xs:space-x-2 flex items-center space-x-4 rounded-md border p-4">
         <Sol height={28} width={28} />
         <div className="flex-1 space-y-1">
           <p className="text-sm font-medium leading-none">
@@ -36,7 +36,7 @@ const GasFee: FC<GasFeesProps> = ({ totalGasSpent }) => {
               : totalGasSpent / LAMPORTS_PER_SOL}{" "}
             {feesUnit}
           </p>
-          <p className="text-sm text-muted-foreground">
+          <p className="xs:text-xs text-sm text-muted-foreground">
             Gas spent in last 24 hours
           </p>
         </div>

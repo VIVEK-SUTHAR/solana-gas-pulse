@@ -27,7 +27,10 @@ export default function GasDetails({
   const router = useRouter()
 
   return (
-    <Card className={cn("w-[380px] bg-transparent", className)} {...props}>
+    <Card
+      className={cn("xs:w-[340px] w-[380px] bg-transparent", className)}
+      {...props}
+    >
       <CardHeader>
         <CardTitle>Gas Details</CardTitle>
         <CardDescription>
