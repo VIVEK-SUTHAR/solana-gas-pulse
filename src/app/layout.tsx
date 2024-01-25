@@ -4,6 +4,7 @@ import "@solana/wallet-adapter-react-ui/styles.css"
 import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import SolanaProvider from "@/providers/SolanaProvider"
+import { Analytics } from "@vercel/analytics/react"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
@@ -83,6 +84,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Navbar />
             {children}
+            <Analytics />
             <Footer />
             <BgGradinet />
             <Toaster />

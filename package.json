@@ -19,6 +19,7 @@
     "@solana/wallet-adapter-wallets": "^0.19.25",
     "@solana/web3.js": "^1.89.1",
     "@t3-oss/env-nextjs": "^0.7.3",
+    "@vercel/analytics": "^1.1.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "lucide-react": "^0.302.0",
