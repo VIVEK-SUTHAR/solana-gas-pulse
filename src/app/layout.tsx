@@ -4,6 +4,7 @@ import "@solana/wallet-adapter-react-ui/styles.css"
 import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import SolanaProvider from "@/providers/SolanaProvider"
+import { ThemeProvider } from "@/providers/ThemeProvider"
 import { Analytics } from "@vercel/analytics/react"
 
 import { siteConfig } from "@/config/site"
@@ -12,7 +13,6 @@ import { Toaster } from "@/components/ui/sonner"
 import BgGradinet from "@/components/BgGradinet"
 import Footer from "@/components/Footer"
 import Navbar from "@/components/Navbar"
-import { ThemeProvider } from "@/components/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] })
 

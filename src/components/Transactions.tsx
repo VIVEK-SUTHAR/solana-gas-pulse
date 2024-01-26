@@ -6,9 +6,9 @@ import { useWallet } from "@solana/wallet-adapter-react"
 
 import useTotalSpentOnGas from "@/hooks/useTotalSpentOnGas"
 
-import GasDetails from "./Cards/DetailsCard"
-import DetailsError from "./DetailsError"
-import DetailsSkleton from "./DetailsSkleton"
+import GasDetails from "./DetailsCard/DetailsCard"
+import DetailsError from "./DetailsCard/DetailsError"
+import DetailsSkleton from "./DetailsCard/DetailsSkleton"
 
 export type CustomError = {
   title: string

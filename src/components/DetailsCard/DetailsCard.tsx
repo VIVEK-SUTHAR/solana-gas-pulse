@@ -1,16 +1,15 @@
-import { useRouter } from "next/navigation"
-
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
 import {
   Card,
+  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
 
-import GasFee from "../GasFee"
+import TrackAnother from "../TrackAnother"
+import GasFee from "./GasFee"
 
 type CardProps = React.ComponentProps<typeof Card>
 
@@ -24,8 +23,6 @@ export default function GasDetails({
   totalTransactions = 0,
   ...props
 }: GasDetailsProps) {
-  const router = useRouter()
-
   return (
     <Card
       className={cn("xs:w-[340px] w-[380px] bg-transparent", className)}
@@ -37,15 +34,11 @@ export default function GasDetails({
           You have done {totalTransactions} txns in last 24 hours
         </CardDescription>
       </CardHeader>
-      <GasFee totalGasSpent={totalGasSpent} />
+      <CardContent className="grid gap-4">
+        <GasFee totalGasSpent={totalGasSpent} />
+      </CardContent>
       <CardFooter>
-        <Button
-          variant={"outline"}
-          className="w-full"
-          onClick={() => router.back()}
-        >
-          Track another addresss 👀
-        </Button>
+        <TrackAnother />
       </CardFooter>
     </Card>
   )

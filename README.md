@@ -1,58 +1,54 @@
-# Next Entree
+# SolGasPulse
 
-Next.js 14+ starter template with app router, shadcn/ui, typesafe env, icons and configs setup.
+Track your Solana gas expenditure over the last 24 hours with SolGasPulse! 🚀
 
-## Usage
+## Overview
 
-1. Setup a project using the template
-
-```bash
-pnpm create next-app -e https://github.com/redpangilinan/next-entree
-```
-
-```bash
-npx create-next-app -e https://github.com/redpangilinan/next-entree
-```
-
-```bash
-yarn create next-app -e https://github.com/redpangilinan/next-entree
-```
-
-```bash
-bunx create-next-app -e https://github.com/redpangilinan/next-entree
-```
-
-2. Copy `.env.example` to `.env.local`
-
-```bash
-cp .env.example .env.local
-```
+SolGasPulse is a tool designed to help you monitor and analyze the amount of Solana gas (⛽️) you've spent within the last 24 hours. This project also supports tracking transactions associated with .sol domains.
 
 ## Features
 
-This template uses [shadcn](https://github.com/shadcn)'s Next.js app structure from [shadcn/ui](https://ui.shadcn.com/).
+- **Gas Tracking:** View detailed information on your Solana gas consumption.
+- **Time Frame:** Analyze your gas usage within the last 24 hours.
+- **.sol Domain Support:** SolGasPulse seamlessly integrates with Solana transactions involving .sol domains.
 
-- Next.js 14+ `/app` router
-- TypeScript
-- Tailwind CSS
-- shadcn/ui (Radix UI + Tailwind)
-- Prettier (w/ auto sort imports and tailwind classes)
-- SEO optimized
-- Typesafe env, icons, and config
-- Ready to use - jump right into development
+## Getting Started
 
-## Scripts
+1. **Clone the Repository:**
 
-If you are using a different package manager, be sure to update the package.json format scripts.
+   ```bash
+   git clone https://github.com/VIVEK-SUTHAR/solana-gas-pulse
+   ```
 
-1. Check project formatting
+2. **Install Dependencies:**
 
-```bash
-pnpm format:check
-```
+   ```bash
+   cd SolGasPulse
+   npm install
+   ```
 
-2. Format the project
+3. **Configure:**
 
-```bash
-pnpm format
-```
+   - Add the necessary environment variables in `.env` file
+
+4. **Run the Application:**
+
+   ```bash
+   npm run dev
+   #or
+   yarn dev
+   ```
+
+5. **Access SolGasPulse:**
+   Open your browser and navigate to `http://localhost:3000` to start tracking your Solana gas usage!
+
+## Configuration
+
+In the `.env` file, you can set the following configurations:
+
+- `SOLANA_RPC_URL`: The Solana RPC endpoint URL.
+- `SOLANA_SNS_RPC_URL`: The Solana RPC Endpoint for `.sol` domain resolving.(I used quicknode)
+
+## Contributing
+
+Contributions are welcome! Feel free to submit issues or pull requests.
