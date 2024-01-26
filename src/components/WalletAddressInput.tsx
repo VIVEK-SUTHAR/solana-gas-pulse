@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import { SOL_DOMAIN_POSTFIX } from "@/constants"
 import isValidSolanaAddress from "@/utils/validateAddress"
 import { useWallet } from "@solana/wallet-adapter-react"
 import { toast } from "sonner"
@@ -33,6 +34,11 @@ function WalletAddressInput() {
     if (solAddres === null || solAddres === "") {
       return
     }
+    if (solAddres.endsWith(SOL_DOMAIN_POSTFIX)) {
+      router.push(`/address/${solAddres}`)
+      return
+    }
+
     if (!isValidSolanaAddress(solAddres)) {
       toast.error("Invalid Solana address", {
         style: {
@@ -45,15 +51,14 @@ function WalletAddressInput() {
     router.push(`/address/${solAddres}`)
   }
 
+  const placeHolderText = wallet?.adapter.connected
+    ? `${wallet.adapter.publicKey?.toString()}`
+    : `Enter your wallet address or .sol domain`
   return (
     <div className="mt-16 flex justify-center gap-x-6 gap-y-4">
       <Input
         type="text"
-        placeholder={
-          wallet?.adapter.connected
-            ? `${wallet.adapter.publicKey?.toString()}`
-            : `Enter your wallet address`
-        }
+        placeholder={placeHolderText}
         className="w-2/3"
         value={solAddres ?? ""}
         onChange={(e) => {

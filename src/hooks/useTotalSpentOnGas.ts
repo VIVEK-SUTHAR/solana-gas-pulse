@@ -1,18 +1,27 @@
 import React, { useState } from "react"
+import { SOL_DOMAIN_POSTFIX } from "@/constants"
 import isWithin24Hours from "@/utils/isWithin24Hours"
 
+import useSnsDomainResolver from "./useSnsDomainResolver"
 import useTransactionAPI from "./useTransaction"
 
 const initialDetailsState = {
   totalGasSpent: 0,
   totalTransactions: 0,
 }
-type Status = "loading" | "done" | "unknown-error" | "no-txns"
-function useTotalSpentOnGas(address: string) {
+type Status =
+  | "loading"
+  | "done"
+  | "unknown-error"
+  | "no-txns"
+  | "invalid-domain"
+
+function useTotalSpentOnGas(inputAddress: string) {
   const [status, setStatus] = useState<Status>("loading")
   const [gasDetails, setGasDetails] = useState(initialDetailsState)
 
   const { getTransaction, getRecentTransactions } = useTransactionAPI()
+  const { resolveAddressFromDomain } = useSnsDomainResolver()
 
   React.useEffect(() => {
     const singleTxnAbortController = new AbortController()
@@ -37,14 +46,31 @@ function useTotalSpentOnGas(address: string) {
       return totalGasSpent
     }
 
-    const calculateGasInLast24Hours = async () => {
+    const calculateGasInLast24Hours = async (
+      solAddress: string,
+      isSolDomain: boolean = false
+    ) => {
       try {
+        if (isSolDomain) {
+          const resolvedAddress = await resolveAddressFromDomain(solAddress)
+          if (resolvedAddress === null) {
+            setStatus("invalid-domain")
+            return
+          }
+          if (resolvedAddress) {
+            solAddress = resolvedAddress
+          }
+        }
+
         const recentTransactions = await getRecentTransactions(
-          address,
+          solAddress,
           recentTxnsAbortController
         )
 
-        if (!recentTransactions) return
+        if (!recentTransactions) {
+          setStatus("unknown-error")
+          return
+        }
 
         if (recentTransactions && recentTransactions.length === 0) {
           setGasDetails((p) => ({ ...p, totalTransactions: 0 }))
@@ -76,7 +102,12 @@ function useTotalSpentOnGas(address: string) {
         setStatus("unknown-error")
       }
     }
-    calculateGasInLast24Hours()
+
+    if (inputAddress.endsWith(SOL_DOMAIN_POSTFIX)) {
+      calculateGasInLast24Hours(inputAddress, true)
+    } else {
+      calculateGasInLast24Hours(inputAddress, false)
+    }
 
     return () => {
       singleTxnAbortController.abort()
