@@ -7,8 +7,9 @@ const initialDetailsState = {
   totalGasSpent: 0,
   totalTransactions: 0,
 }
+type Status = "loading" | "done" | "unknown-error" | "no-txns"
 function useTotalSpentOnGas(address: string) {
-  const [status, setStatus] = useState("loading")
+  const [status, setStatus] = useState<Status>("loading")
   const [gasDetails, setGasDetails] = useState(initialDetailsState)
 
   const { getTransaction, getRecentTransactions } = useTransactionAPI()
@@ -47,7 +48,7 @@ function useTotalSpentOnGas(address: string) {
 
         if (recentTransactions && recentTransactions.length === 0) {
           setGasDetails((p) => ({ ...p, totalTransactions: 0 }))
-          setStatus("done")
+          setStatus("no-txns")
           return
         }
 
@@ -56,7 +57,7 @@ function useTotalSpentOnGas(address: string) {
         )
         if (last24HoursTxns.length === 0) {
           setGasDetails((p) => ({ ...p, totalTransactions: 0 }))
-          setStatus("done")
+          setStatus("no-txns")
           return
         }
         setGasDetails((p) => ({
@@ -72,7 +73,7 @@ function useTotalSpentOnGas(address: string) {
 
         setStatus("done")
       } catch (error) {
-        setStatus("error")
+        setStatus("unknown-error")
       }
     }
     calculateGasInLast24Hours()

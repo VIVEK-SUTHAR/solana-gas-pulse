@@ -18,9 +18,9 @@ export async function POST(request: Request) {
       }),
     }
     const allTxns = await fetch(SOLANA_RPC_URL, options)
-    console.log("allTxns", allTxns)
+
     const txnsJson = await allTxns.json()
-    console.log("txnsJson", txnsJson)
+
     return Response.json(txnsJson.result)
   } catch (e) {
     console.log(e, "error")

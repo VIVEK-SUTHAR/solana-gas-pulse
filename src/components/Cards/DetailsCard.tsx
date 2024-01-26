@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-import GasFee from "./GasFee"
+import GasFee from "../GasFee"
 
 type CardProps = React.ComponentProps<typeof Card>
 
