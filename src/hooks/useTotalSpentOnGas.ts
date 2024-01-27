@@ -1,6 +1,6 @@
-import React, { useState } from "react"
 import { SOL_DOMAIN_POSTFIX } from "@/constants"
 import isWithin24Hours from "@/utils/isWithin24Hours"
+import React, { useState } from "react"
 
 import useSnsDomainResolver from "./useSnsDomainResolver"
 import useTransactionAPI from "./useTransaction"
