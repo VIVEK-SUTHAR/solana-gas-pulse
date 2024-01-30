@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { APP_NAME } from "@/constants"
 
@@ -14,9 +15,16 @@ export default function Navbar() {
     <Container>
       <div className="flex items-center justify-between rounded-full py-6">
         <div
-          className="w-auto cursor-pointer text-lg font-semibold"
+          className="flex w-auto cursor-pointer items-center text-lg font-semibold"
           onClick={() => router.push("/")}
         >
+          <Image
+            src={"/logo.png"}
+            alt="logo"
+            height={48}
+            width={48}
+            className="hidden lg:block "
+          />
           {APP_NAME}
         </div>
         <div className="w-auto">
