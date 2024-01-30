@@ -1,6 +1,6 @@
+import React, { useState } from "react"
 import { SOL_DOMAIN_POSTFIX } from "@/constants"
 import isWithin24Hours from "@/utils/isWithin24Hours"
-import React, { useState } from "react"
 
 import useSnsDomainResolver from "./useSnsDomainResolver"
 import useTransactionAPI from "./useTransaction"
@@ -30,19 +30,20 @@ function useTotalSpentOnGas(inputAddress: string) {
     const getTotalGasSpent = async (signatureArray: Array<string>) => {
       let totalGasSpent = 0
 
-      for (const signature of signatureArray) {
-        const transactionDetails = await getTransaction(
-          signature,
-          singleTxnAbortController
+      const allTransactions = await Promise.allSettled(
+        signatureArray.map((signature) =>
+          getTransaction(signature, singleTxnAbortController)
         )
-        if (
-          transactionDetails &&
-          transactionDetails.meta &&
-          transactionDetails.meta.fee
-        ) {
-          totalGasSpent += transactionDetails.meta.fee
+      )
+
+      allTransactions.forEach((txn) => {
+        if (txn.status === "fulfilled") {
+          if (txn.value && txn.value.meta && txn.value.meta.fee) {
+            totalGasSpent += txn.value.meta.fee
+          }
         }
-      }
+      })
+
       return totalGasSpent
     }
 

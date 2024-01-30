@@ -16,6 +16,10 @@ function useTransactionAPI() {
             signature: txSignature,
           }),
           signal: abortController.signal,
+          cache: "force-cache",
+          next: {
+            revalidate: 3600,
+          },
         })
 
         if (!transaction.ok) {
@@ -42,6 +46,10 @@ function useTransactionAPI() {
           body: JSON.stringify({
             solAddress: address,
           }),
+          cache: "force-cache",
+          next: {
+            revalidate: 3600,
+          },
           signal: abortController.signal,
         })
         const jsonSignatures: Array<ConfirmedSignatureInfo> =
