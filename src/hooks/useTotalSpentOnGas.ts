@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import { SOL_DOMAIN_POSTFIX } from "@/constants"
+import Events from "@/constants/events"
+import event from "@/utils/event"
 import isWithin24Hours from "@/utils/isWithin24Hours"
 
 import useSnsDomainResolver from "./useSnsDomainResolver"
@@ -60,6 +62,7 @@ function useTotalSpentOnGas(inputAddress: string) {
           }
           if (resolvedAddress) {
             solAddress = resolvedAddress
+            void event(Events.UsedSolDomain)
           }
         }
 
@@ -99,6 +102,7 @@ function useTotalSpentOnGas(inputAddress: string) {
         setGasDetails((p) => ({ ...p, totalGasSpent: totalFee }))
 
         setStatus("done")
+        void event(Events.WalletTracked)
       } catch (error) {
         setStatus("unknown-error")
       }

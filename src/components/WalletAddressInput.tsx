@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { SOL_DOMAIN_POSTFIX } from "@/constants"
+import Events from "@/constants/events"
+import event from "@/utils/event"
 import isValidSolanaAddress from "@/utils/validateAddress"
 import { useWallet } from "@solana/wallet-adapter-react"
 import { toast } from "sonner"
@@ -19,6 +21,7 @@ function WalletAddressInput() {
   useEffect(() => {
     if (wallet?.adapter.connected) {
       setSolAddres(wallet?.adapter.publicKey?.toString() || null)
+      void event(Events.WalletConnected)
     }
     wallet?.adapter.on("disconnect", () => {
       setSolAddres(null)
