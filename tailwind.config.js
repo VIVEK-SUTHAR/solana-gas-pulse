@@ -75,6 +75,7 @@ export const theme = {
   },
   screens: {
     xs: "360px",
+
     ..._screens,
   },
 }

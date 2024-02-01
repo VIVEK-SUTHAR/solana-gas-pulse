@@ -8,7 +8,9 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
+import ShareButton from "../ShareButton"
 import TrackAnother from "../TrackAnother"
+import { Button } from "../ui/button"
 import GasFee from "./GasFee"
 
 type CardProps = React.ComponentProps<typeof Card>
@@ -25,7 +27,7 @@ export default function GasDetails({
 }: GasDetailsProps) {
   return (
     <Card
-      className={cn("xs:w-[340px] w-[380px] bg-transparent", className)}
+      className={cn("w-[380px] bg-transparent xs:w-[320px]", className)}
       {...props}
     >
       <CardHeader>
@@ -37,8 +39,9 @@ export default function GasDetails({
       <CardContent className="grid gap-4">
         <GasFee totalGasSpent={totalGasSpent} />
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex flex-col gap-4">
         <TrackAnother />
+        <ShareButton />
       </CardFooter>
     </Card>
   )
