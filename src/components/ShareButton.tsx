@@ -10,7 +10,7 @@ function ShareButton() {
     <Button variant={"outline"} className="w-full">
       <Twitter className="mr-2 h-4 w-4" />
       <a
-        href={`https://twitter.com/intent/tweet?text= + ${encodeURIComponent(TweetText)}`}
+        href={`https://twitter.com/intent/tweet?text=+${encodeURIComponent(TweetText)}`}
         target="_blank"
       >
         Share with friend

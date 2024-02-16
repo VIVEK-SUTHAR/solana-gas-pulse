@@ -6,7 +6,9 @@ export const env = createEnv({
     NEXT_PUBLIC_APP_URL: z.string().min(1),
   },
   runtimeEnv: {
+    NEXT_PUBLIC_MIXPANEL_API_KEY: process.env.NEXT_PUBLIC_MIXPANEL_API_KEY,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     SOLANA_RPC_URL: z.string().min(1).includes("https://"),
+    SOLANA_SNS_RPC_URL: z.string().min(1).includes("https://"),
   },
 })
